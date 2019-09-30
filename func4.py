@@ -16,19 +16,22 @@ def main():
     num2 = int(input("Enter num2#"))
     opr = input("Enter op::")
 
+    logic = None
+
     if (opr == "+"):
         logic = add
 
     elif (opr == "-"):
         logic = diff
+
     else:
         print("Not supported")
 
-    print(type(logic))
 
-    res = calc(logic, num1, num2 )
-
-    print(res)
+    if logic != None:
+        print(type(logic))
+        res = calc(logic, num1, num2 )
+        print(res)
 
 
 main()
