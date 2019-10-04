@@ -8,7 +8,7 @@ class Rectangle (Shape):
        self.width=w
        self.height =h
 
-   def a (self):
+   def area (self):
        return self.width *  self.height
 
    def display(self):
