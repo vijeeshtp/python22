@@ -1,7 +1,13 @@
-def myfunction():
-    yield 1
-    yield 2
-    yield 3
+def myfunction(s, e, i):
+
+   while (s <= e):
+       yield s
+       s = s+ i
+
+
+print (myfunction(1, 100))
+
+
 
 # executing generator -1
 x= iter(myfunction())
@@ -24,4 +30,5 @@ while True :
         print (next(x))
     except StopIteration:
         break
+
 
