@@ -16,9 +16,11 @@ class student :
 
 
 def readfile (filename) :
-    data = open (filename)
-    lines= data.readlines()
-    return lines
+
+        with open (filename) as data:
+            lines= data.readlines()
+
+        return lines
 
 def processdata (lines):
     l= []
@@ -29,23 +31,40 @@ def processdata (lines):
         l.append( s )
     return l
 
+def writetofile_old(filename, data):
+
+    with open(filename, mode="w") as f:
+        for x in data:
+            s = x.rollno + "," + x.name +  "," + str (x.total) + "\n"
+            f.write(s)
+
 def writetofile(filename, data):
-    f = open(filename, mode="w")
+    l= []
     for x in data:
-        s = x.rollno + "," + x.name +  "," + str (x.total) + "\n"
-        f.write(s)
+        s = x.rollno + "," + x.name + "," + str(x.total) + "\n"
+        l.append(s)
+
+    with open(filename, mode="w") as f:
+            f.writelines(l)
+
 
 def main ():
-    lines =readfile("students.csv")
-    records= processdata(lines)
-    print (records)
-    records.sort(key=lambda a : a.name)
-    writetofile("namelist.csv", records)
 
-    records.sort(key=lambda x: x.rollno)
-    writetofile("rollno_list.csv", records)
+    try :
+        lines =readfile("students.csv")
 
-    records.sort(key=lambda x: x.total, reverse=True)
-    writetofile("mark_list.csv", records)
+        records= processdata(lines)
+        print (records)
+        records.sort(key=lambda a : a.name)
+        writetofile("namelist.csv", records)
+
+        records.sort(key=lambda x: x.rollno)
+        writetofile("rollno_list.csv", records)
+
+        records.sort(key=lambda x: x.total, reverse=True)
+        writetofile("mark_list.csv", records)
+
+    except FileNotFoundError:
+        print ("File name is incorrect")
 
 main()
