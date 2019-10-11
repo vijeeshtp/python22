@@ -1,4 +1,4 @@
-def  readfile (filename) :
+def readfile (filename) :
     data = open (filename)
     lines= data.readlines()
     return lines
